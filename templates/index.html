@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block body %}
+<a class="btn" href="{{ url_for('new') }}">＋ やることを登録</a>
+
+{% for t in todos %}
+<div class="card">
+  <h2>{{ t.title }}</h2>
+  <div class="due">期日: {{ t.due or "なし" }}</div>
+  <div class="content">{{ t.content }}</div>
+  <div class="actions">
+    <a class="btn gray" href="{{ url_for('edit', todo_id=t.id) }}">編集</a>
+    <form method="post" action="{{ url_for('delete', todo_id=t.id) }}"
+          onsubmit="return confirm('本当に消しますか？')">
+      <button class="btn red">削除</button>
+    </form>
+  </div>
+</div>
+{% else %}
+<p>まだ やることは ありません。</p>
+{% endfor %}
+{% endblock %}

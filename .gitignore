@@ -1,0 +1,7 @@
+# ひみつのファイル（GitHubに絶対にのせない）
+credentials.json
+.env
+# 自動でできるファイル
+venv/
+__pycache__/
+.DS_Store
