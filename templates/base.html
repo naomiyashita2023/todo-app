@@ -4,30 +4,76 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>やることリスト</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: sans-serif; background: #f4f6fb; margin: 0; color: #222; }
-    .wrap { max-width: 720px; margin: 0 auto; padding: 16px; }
-    h1 a { color: inherit; text-decoration: none; }
-    .btn { display: inline-block; padding: 8px 16px; border-radius: 8px; border: none;
-           background: #3b6cf6; color: #fff; text-decoration: none; cursor: pointer; font-size: 14px; }
-    .btn.gray { background: #888; }
-    .btn.red { background: #e5484d; }
-    .card { background: #fff; border-radius: 12px; padding: 16px; margin: 12px 0;
-            box-shadow: 0 1px 4px rgba(0,0,0,.08); }
-    .card h2 { margin: 0 0 6px; font-size: 18px; }
-    .due { color: #3b6cf6; font-size: 14px; }
-    .due.over { color: #e5484d; font-weight: bold; }
-    .content { white-space: pre-wrap; margin: 8px 0; }
-    .actions { display: flex; gap: 8px; }
-    label { display: block; margin-top: 12px; font-weight: bold; }
-    input, textarea { width: 100%; padding: 8px; font-size: 16px; box-sizing: border-box;
-                      border: 1px solid #ccc; border-radius: 8px; }
-    textarea { height: 120px; }
+    :root {
+      --pink: #ffb7c9;
+      --pink-dark: #f0789a;
+      --blue: #a8d8f0;
+      --blue-dark: #5aaed6;
+      --lavender: #cdb8f0;
+      --text: #5a4a5e;
+      --sub: #9a8a9e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Zen Maru Gothic", sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background: linear-gradient(135deg, #ffe4ec 0%, #f3e8ff 50%, #dff2fb 100%);
+      background-attachment: fixed;
+    }
+    .wrap { max-width: 640px; margin: 0 auto; padding: 24px 16px 48px; }
+
+    h1 { text-align: center; font-size: 28px; margin: 8px 0 24px; }
+    h1 a { color: var(--pink-dark); text-decoration: none; }
+
+    .btn {
+      display: inline-block; padding: 10px 20px; border-radius: 999px; border: none;
+      font-family: inherit; font-size: 15px; font-weight: 700; text-decoration: none;
+      cursor: pointer; color: #fff; transition: transform .15s, box-shadow .15s;
+      background: linear-gradient(135deg, var(--pink-dark), var(--lavender));
+      box-shadow: 0 4px 12px rgba(240, 120, 154, .3);
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(240, 120, 154, .4); }
+    .btn.small { padding: 6px 16px; font-size: 13px; box-shadow: none; }
+    .btn.blue { background: var(--blue); color: #2f6d8c; }
+    .btn.gray { background: #eee6f0; color: var(--sub); box-shadow: none; }
+    .btn.red { background: #ffe0e6; color: var(--pink-dark); }
+    .center { text-align: center; }
+
+    .card {
+      background: rgba(255, 255, 255, .85); border-radius: 24px; padding: 20px 22px;
+      margin: 16px 0; box-shadow: 0 6px 20px rgba(205, 184, 240, .35);
+      border: 2px solid #fff;
+    }
+    .card h2 { margin: 0 0 8px; font-size: 19px; }
+    .card.over { border-color: var(--pink); }
+
+    .due {
+      display: inline-block; font-size: 13px; padding: 3px 12px; border-radius: 999px;
+      background: #e6f4fb; color: #2f6d8c;
+    }
+    .due.soon { background: #fff2cc; color: #a07a00; }
+    .due.over { background: #ffe0e6; color: var(--pink-dark); font-weight: 700; }
+    .content { white-space: pre-wrap; margin: 12px 0; line-height: 1.7; }
+    .actions { display: flex; gap: 8px; justify-content: flex-end; }
+    .empty { text-align: center; color: var(--sub); margin-top: 40px; font-size: 18px; }
+
+    label { display: block; margin: 16px 0 6px; font-weight: 700; color: var(--pink-dark); }
+    input, textarea {
+      width: 100%; padding: 12px 14px; font-size: 16px; font-family: inherit; color: var(--text);
+      border: 2px solid #f3e8ff; border-radius: 16px; background: #fffafd; outline: none;
+    }
+    input:focus, textarea:focus { border-color: var(--pink); }
+    textarea { height: 120px; resize: vertical; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1><a href="{{ url_for('index') }}">📝 やることリスト</a></h1>
+    <h1><a href="{{ url_for('index') }}">🌸 やることリスト 🌸</a></h1>
     {% block body %}{% endblock %}
   </div>
 </body>

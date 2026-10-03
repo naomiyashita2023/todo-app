@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block body %}
 <div class="card">
-  <h2>{{ "やることを編集" if todo else "やることを登録" }}</h2>
+  <h2>{{ "✏️ やることを編集" if todo else "🌱 やることを登録" }}</h2>
   <form method="post">
     <label>タイトル</label>
     <input name="title" required value="{{ todo.title if todo else '' }}">
@@ -12,7 +12,7 @@
     <label>期日</label>
     <input type="date" name="due" value="{{ todo.due if todo else '' }}">
 
-    <p class="actions">
+    <p class="actions" style="margin-top:24px">
       <button class="btn">保存する</button>
       <a class="btn gray" href="{{ url_for('index') }}">もどる</a>
     </p>

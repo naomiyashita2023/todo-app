@@ -7,6 +7,8 @@ Todoリストアプリ（データは Google スプレッドシートに保存�
 import json
 import os
 import uuid
+from datetime import date, datetime
+from zoneinfo import ZoneInfo
 
 import gspread
 from dotenv import load_dotenv
@@ -58,7 +60,26 @@ def index():
         if r and r[0]
     ]
     todos.sort(key=lambda t: t["due"] or "9999-99-99")  # 期日が近い順
+    for t in todos:
+        t["due_label"], t["status"] = due_info(t["due"])
     return render_template("index.html", todos=todos)
+
+
+def due_info(due):
+    """期日から「あと何日」の文字と、色分け用の状態を作る"""
+    if not due:
+        return "期日なし", ""
+    try:
+        days = (date.fromisoformat(due) - datetime.now(ZoneInfo("Asia/Tokyo")).date()).days
+    except ValueError:
+        return due, ""
+    if days < 0:
+        return f"{due}（{-days}日すぎています）", "over"
+    if days == 0:
+        return f"{due}（今日まで！）", "soon"
+    if days <= 3:
+        return f"{due}（あと{days}日）", "soon"
+    return f"{due}（あと{days}日）", ""
 
 
 @app.route("/new", methods=["GET", "POST"])
